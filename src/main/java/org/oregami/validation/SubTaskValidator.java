@@ -10,7 +10,7 @@ import org.oregami.service.ServiceErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubTaskValidator {
+public class SubTaskValidator implements IEntityValidator {
 
     private final SubTask subTask;
 
@@ -57,6 +57,14 @@ public class SubTaskValidator {
         }
 
         return errorMessages;
+    }
+
+    @Override
+    public List<ServiceError> validateForUpdate() {
+
+        List<ServiceError> errors = new ArrayList<>();
+        errors.addAll(validateRequiredFields());
+        return errors;
     }
 
 }

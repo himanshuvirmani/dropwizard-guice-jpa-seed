@@ -31,8 +31,7 @@ public class Task extends BaseEntityUUID {
 
     private LocalDateTime changeTime = null;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER)
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch= FetchType.EAGER, mappedBy = "task")
     private final Set<SubTask> subTasks = new HashSet<>();
 
     @OneToOne

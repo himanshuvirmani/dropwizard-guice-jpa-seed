@@ -14,6 +14,7 @@ import org.oregami.entities.SubTask;
 import org.oregami.entities.Task;
 import org.oregami.service.LanguageService;
 import org.oregami.service.ServiceResult;
+import org.oregami.service.SubTaskService;
 import org.oregami.service.TaskService;
 
 /**
@@ -66,27 +67,32 @@ public class DatabaseFiller {
 
     private void addTasks() {
         TaskService taskService = injector.getInstance(TaskService.class);
+        SubTaskService subTaskService = injector.getInstance(SubTaskService.class);
         LanguageDao languageDao = injector.getInstance(LanguageDao.class);
         Task t1 = new Task("task 1");
         t1.setDescription("This is task 1");
         t1.setLanguage(languageDao.findByExactName("english"));
-
         SubTask sub1 = new SubTask();
         sub1.setDescription("this a subtask 1");
         t1.addSubTask(sub1);
-
         ServiceResult<Task> taskServiceResult = taskService.createNewEntity(t1, null);
         if (taskServiceResult.hasErrors()) {
             throw new RuntimeException(taskServiceResult.getErrors().toString());
         }
+        sub1.setTask(t1);
+        ServiceResult<SubTask> subtaskServiceResult = subTaskService.createNewEntity(sub1, null);
+        if (taskServiceResult.hasErrors()) {
+            throw new RuntimeException(taskServiceResult.getErrors().toString());
+        }
 
+/*
         Task t2 = new Task("task 2");
         t2.setDescription("This is task 2");
         t2.setLanguage(languageDao.findByExactName("english"));
         taskServiceResult = taskService.createNewEntity(t2, null);
         if (taskServiceResult.hasErrors()) {
             throw new RuntimeException(taskServiceResult.getErrors().toString());
-        }
+        }*/
 
     }
 }

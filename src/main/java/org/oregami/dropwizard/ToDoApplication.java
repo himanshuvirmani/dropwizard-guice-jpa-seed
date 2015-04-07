@@ -34,8 +34,8 @@ import java.util.Random;
 public class ToDoApplication extends Application<ToDoConfiguration> {
 
   public static final String JPA_UNIT =
-    "data";
-  // "dataMysql";
+    //"data";
+    "dataMysql";
 
   public static byte[] authKey;
 
