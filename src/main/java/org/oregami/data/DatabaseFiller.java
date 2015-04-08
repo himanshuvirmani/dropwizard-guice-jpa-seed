@@ -75,15 +75,15 @@ public class DatabaseFiller {
         SubTask sub1 = new SubTask();
         sub1.setDescription("this a subtask 1");
         t1.addSubTask(sub1);
+        sub1.setTask(t1);
         ServiceResult<Task> taskServiceResult = taskService.createNewEntity(t1, null);
         if (taskServiceResult.hasErrors()) {
             throw new RuntimeException(taskServiceResult.getErrors().toString());
         }
-        sub1.setTask(t1);
-        ServiceResult<SubTask> subtaskServiceResult = subTaskService.createNewEntity(sub1, null);
+/*        ServiceResult<SubTask> subtaskServiceResult = subTaskService.createNewEntity(sub1, null);
         if (taskServiceResult.hasErrors()) {
             throw new RuntimeException(taskServiceResult.getErrors().toString());
-        }
+        }*/
 
 /*
         Task t2 = new Task("task 2");
